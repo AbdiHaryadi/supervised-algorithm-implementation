@@ -1,5 +1,6 @@
 import csv
-from src.knn import knn 
+from src.knn import knn
+from src.logistic_regression import logistic_regression
 
 with open("data.csv", mode="r") as csv_file:
     csv_reader = csv.DictReader(csv_file)
@@ -33,14 +34,17 @@ for col in list(input_col):
     query.append(input("{}: ".format(col)))
 
 print("Pilih algoritme:")
-print("- KNN")
-print("- Logistic Regression")
-print("- ID3")
+print("- KNN (pastikan semua jenis datanya kontinu)")
+print("- Logistic Regression (pastikan semua jenis datanya kontinu)")
+print("- ID3 (pastikan semua jenis datanya kategorial biner)")
 algorithm_idx = int(input("Algoritme ke-: ")) - 1
 assert algorithm_idx >= 0 and algorithm_idx < 3
 
-if (algorithm_idx == 0):
+if algorithm_idx == 0:
     result = knn(query, int(input("Nilai K: ")), train_data)
+    print(result)
+elif algorithm_idx == 1:
+    result = logistic_regression(query, train_data, int(input("Epoch: ")), float(input("Laju belajar: ")))
     print(result)
 else:
     print("Soon.")
