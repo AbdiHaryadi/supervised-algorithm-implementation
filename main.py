@@ -1,8 +1,9 @@
 import csv
 from src.knn import knn
 from src.logistic_regression import logistic_regression
+from src.id3 import id3
 
-with open("data.csv", mode="r") as csv_file:
+with open(input("Data: "), mode="r") as csv_file:
     csv_reader = csv.DictReader(csv_file)
     data_set = [row for row in csv_reader]
     
@@ -28,11 +29,6 @@ except ValueError:
 #print(output_data)
 train_data = [(tuple([row[col_name] for col_name in input_col]), row[output_col]) for row in data_set]
 
-query = []
-print("Masukkan kueri:")
-for col in list(input_col):
-    query.append(input("{}: ".format(col)))
-
 print("Pilih algoritme:")
 print("- KNN (pastikan semua jenis datanya kontinu)")
 print("- Logistic Regression (pastikan semua jenis datanya kontinu)")
@@ -40,11 +36,20 @@ print("- ID3 (pastikan semua jenis datanya kategorial biner)")
 algorithm_idx = int(input("Algoritme ke-: ")) - 1
 assert algorithm_idx >= 0 and algorithm_idx < 3
 
-if algorithm_idx == 0:
-    result = knn(query, int(input("Nilai K: ")), train_data)
-    print(result)
-elif algorithm_idx == 1:
-    result = logistic_regression(query, train_data, int(input("Epoch: ")), float(input("Laju belajar: ")))
-    print(result)
+if algorithm_idx == 2:
+    id3(data_set, output_col)
 else:
-    print("Soon.")
+    query = []
+    print("Masukkan kueri:")
+    for col in list(input_col):
+        query.append(input("{}: ".format(col)))
+    if algorithm_idx == 0:
+        result = knn(query, int(input("Nilai K: ")), train_data)
+        print(result)
+    else: # algorithm_idx == 1
+        result = logistic_regression(query, train_data, int(input("Epoch: ")), float(input("Laju belajar: ")))
+        print(result)
+    
+
+
+
