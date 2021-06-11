@@ -10,7 +10,8 @@ with open(input("Data: "), mode="r") as csv_file:
 header = [col_name for col_name in data_set[0].keys()]
 col_count = len(header)
 print("Pilih label: ")
-print(*map(lambda x: "- " + x, header), sep = "\n")
+for i in range(col_count):
+    print("{}) {}".format(i + 1, header[i]), sep = "\n")
 label_idx = int(input("Kolom ke-: ")) - 1
 assert label_idx >= 0 and label_idx < col_count
 output_col = header[label_idx]
@@ -30,9 +31,9 @@ except ValueError:
 train_data = [(tuple([row[col_name] for col_name in input_col]), row[output_col]) for row in data_set]
 
 print("Pilih algoritme:")
-print("- KNN (pastikan semua jenis datanya kontinu)")
-print("- Logistic Regression (pastikan semua jenis datanya kontinu)")
-print("- ID3 (pastikan semua jenis datanya kategorial biner)")
+print("1) KNN (pastikan semua jenis datanya kontinu)")
+print("2) Logistic Regression (pastikan semua jenis datanya kontinu)")
+print("3) ID3 (pastikan semua jenis datanya kategorial biner)")
 algorithm_idx = int(input("Algoritme ke-: ")) - 1
 assert algorithm_idx >= 0 and algorithm_idx < 3
 
