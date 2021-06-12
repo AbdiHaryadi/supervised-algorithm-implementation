@@ -45,3 +45,6 @@ Ransum: 1
 Nilai K: 4
 ['2']
 ```
+
+# Pembuat
+M. Abdi Haryadi. H (13519156)
